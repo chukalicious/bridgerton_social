@@ -3,6 +3,7 @@ const Characters = require('../models/charactersModel');
 
 const getCharacters = asyncHandler(async (req, res) => {
   const characters = await Characters.find();
+
   res.status(200).json(characters);
 });
 

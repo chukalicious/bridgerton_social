@@ -1,51 +1,49 @@
 const mongoose = require('mongoose');
 
-const characterSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    // required: true,
+const characterSchema = new mongoose.Schema(
+  {
+    Name: {
+      type: String,
+      // required: true,
+    },
+    Actor: {
+      type: String,
+      // required: true,
+      // unique: true,
+    },
+    imageURL: {
+      type: String,
+    },
+    RoleTitle: {
+      type: String,
+    },
+    Family: {
+      type: String,
+    },
+    RelationshipStatus: {
+      type: String,
+    },
+    NotableTraits: {
+      type: [String],
+    },
+    Personality: {
+      type: String,
+    },
+    RomanticInterests: {
+      type: [String],
+    },
+    KeyEpisodes: {
+      type: [String],
+    },
+    id: {
+      type: Number,
+    },
   },
-  actor: {
-    type: String,
-    // required: true,
-    // unique: true,
-  },
-  imgURL: {
-    type: String,
-  },
-  roleTitle: {
-    type: String,
-  },
-  family: {
-    type: String,
-  },
-  relationshipStatus: {
-    type: String,
-  },
-  notableTraits: {
-    type: [String],
-  },
-  personality: {
-    type: String,
-  },
-  romanticInterests: {
-    type: [String],
-  },
-  keyEpisodes: {
-    type: [String],
-  },
-  hobbies: {
-    type: [String],
-  },
+  {
+    collection: 'info',
+  }
+);
 
-  scandals: {
-    type: [String],
-  },
-  achievements: {
-    type: [String],
-  },
-});
-
-const Character = mongoose.model('Character', characterSchema);
+const Character = mongoose.model('info', characterSchema);
 
 module.exports = Character;
