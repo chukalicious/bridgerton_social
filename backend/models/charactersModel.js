@@ -35,9 +35,6 @@ const characterSchema = new mongoose.Schema(
     KeyEpisodes: {
       type: [String],
     },
-    id: {
-      type: Number,
-    },
   },
   {
     collection: 'info',
