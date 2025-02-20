@@ -35,6 +35,14 @@ const characterSchema = new mongoose.Schema(
     KeyEpisodes: {
       type: [String],
     },
+    likes: {
+      type: Number,
+      default: 0,
+    },
+    unlikes: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     collection: 'info',
