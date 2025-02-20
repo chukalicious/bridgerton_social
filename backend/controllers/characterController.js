@@ -36,4 +36,47 @@ const getCharactersByID = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { getCharacters, getCharactersByID };
+const addLikeToCharacter = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({ message: 'Invalid ID format' });
+  }
+
+  const character = await Characters.findById(new mongoose.Types.ObjectId(id));
+
+  if (character) {
+    character.likes = (character.likes || 0) + 1;
+    await character.save();
+    res.status(200).json({ message: 'Like added', likes: character.likes });
+  } else {
+    res.status(404);
+    throw new Error('Character not found');
+  }
+});
+
+const downvoteCharacter = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send({ message: 'Invalid ID format' });
+  }
+
+  const character = await Characters.findById(new mongoose.Types.ObjectId(id));
+
+  if (character) {
+    character.likes = Math.max((character.likes || 0) - 1, 0); // Ensure likes don't go below 0
+    await character.save();
+    res.status(200).json({ message: 'Downvote added', likes: character.likes });
+  } else {
+    res.status(404);
+    throw new Error('Character not found');
+  }
+});
+
+module.exports = {
+  getCharacters,
+  getCharactersByID,
+  addLikeToCharacter,
+  downvoteCharacter,
+};
